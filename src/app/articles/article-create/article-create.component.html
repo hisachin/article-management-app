@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="loader" *ngIf="isLoading">
+                <div class="animationload">
+                    <div class="osahanloading"></div>
+                </div>
+            </div>
+            <div class="article-crespane-form-box" *ngIf="!isLoading">
+                <h1>{{ heading }} Article</h1>
+                <form [formGroup]="form" (submit)="onSaveArticle()">
+                    <div class="form-group">
+                        <label for="title">Title*</label>
+                        <input type="text" class="form-control" name="title" placeholder="Title *" formControlName="title">
+                        <div *ngIf="form.get('title').invalid && form.get('title').touched" class="text-danger">Title Can not be empty</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content*</label>
+                        <textarea rows="6" class="form-control" name="content" placeholder="Content" formControlName="content"></textarea>
+                        <div *ngIf="form.get('content').invalid && form.get('content').touched" class="text-danger">Content Can not be empty</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file">Article Image*</label>
+                        <input type="file" class="form-control" name="file" (change)="onImagePicked($event)" accept="image/*">
+                    </div>
+                    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+                        <img [src]="imagePreview" [alt]="form.value.title">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="loader" *ngIf="isLoading">
+        <div class="animationload">
+            <div class="osahanloading"></div>
+        </div>
+    </div>
+    <div class="articles-section" *ngIf="articles.length > 0 && !isLoading">
+        <div class="row" *ngFor = 'let article of articles'>
+            <div class="col-md-8 offset-md-2">
+                <div class="article">
+                    <div class="article-img">
+                        <img [src]="article.imagePath" alt="article.title" width="100%">
+                    <div class="article-title">
+                        <h1>{{article.title}}</h1>
+                    </div>
+                    <div class="article-meta-tag">
+                        <p>Publish Date: {{article.time | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                    <div class="article-content">
+                        <p>{{article.content}}</p>
+                    </div>
+                    <div class="article-mngt">
+                        <a class="btn btn-success" [routerLink]="['edit-article',article._id]" >Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-article-section" *ngIf="articles.length <= 0 && !isLoading">
+        <div class="text-center">
+            <p>No Articles Published Yet</p>
+        </div>
+    </div>
+</div>
